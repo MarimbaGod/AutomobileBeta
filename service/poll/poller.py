@@ -41,7 +41,7 @@ def poll(repeat=True):
             #         vin=automobile["vin"],
 
             #     )
-            print("SLDJFJEG")
+
 
         except Exception as e:
             print(e, file=sys.stderr)

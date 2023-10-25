@@ -8,6 +8,9 @@ import CustomerList from './Customers';
 import CustomerForm from './CustomerForm';
 import SalesList from './SalesList';
 
+import TechnicianForm from './TechnicianForm';
+import TechniciansList from './TechniciansList';
+import AppointmentForm from './AppointmentForm';
 
 function App() {
 
@@ -65,6 +68,13 @@ function App() {
           <Route path="customers" element={<CustomerList customer={customer} />} />
           <Route path="customers/new" element={<CustomerForm getCustomer={getCustomer} />} />
           <Route path="sales" element={<SalesList sales={sales} />} />
+          <Route path="technicians">
+            <Route index element={<TechniciansList />} />
+            <Route path="new" element={<TechnicianForm />} />
+          </Route>
+          <Route path="appointments">
+            <Route path="new" element={<AppointmentForm />} />
+          </Route>
         </Routes>
 
       </div>
