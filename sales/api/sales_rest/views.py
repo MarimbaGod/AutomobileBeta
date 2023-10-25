@@ -1,55 +1,9 @@
 from django.shortcuts import render
-from common.json import ModelEncoder
 from django.http import JsonResponse
 from django.views.decorators.http import require_http_methods
 from .models import Salesperson, AutomobileVO, Customer, Sale
 import json
-
-
-class AutomobileVOEncoder(ModelEncoder):
-    model = AutomobileVO
-    properties = [
-        "vin",
-        "sold",
-    ]
-
-
-class CustomerEncoder(ModelEncoder):
-    model = Customer
-    properties = [
-        "first_name",
-        "last_name",
-        "address",
-        "phone_number",
-        "id",
-    ]
-
-
-class SalespersonEncoder(ModelEncoder):
-    model = Salesperson
-    properties = [
-        "first_name",
-        "last_name",
-        "employee_id",
-        "id",
-    ]
-
-
-class SalesEncoder(ModelEncoder):
-    model = Sale
-    properties = [
-        "price",
-        "automobile",
-        "salesperson",
-        "customer",
-        "id"
-    ]
-
-    encoders = {
-        "automobile": AutomobileVOEncoder(),
-        "salesperson": SalespersonEncoder(),
-        "customer": CustomerEncoder()
-    }
+from .encoders import SalesEncoder, CustomerEncoder, SalespersonEncoder
 
 
 @require_http_methods(["GET", "POST"])
@@ -128,7 +82,7 @@ def api_list_customer(request):
         )
 
 
-@require_http_methods(["DELETE"])
+@require_http_methods(["DELETE", "GET"])
 def api_delete_customer(request, pk):
     if request.method == "DELETE":
         try:
@@ -141,6 +95,12 @@ def api_delete_customer(request, pk):
                 {"message": "Invalid ID"},
                 status=404
             )
+    else:
+        customer = Customer.objects.get(id=pk)
+        return JsonResponse(
+            {"customer": customer},
+            encoder=CustomerEncoder
+        )
 
 
 
@@ -160,7 +120,6 @@ def api_list_salespeople(request):
             encoder=SalespersonEncoder,
             safe=False
         )
-
 
 
 @require_http_methods(["DELETE"])
