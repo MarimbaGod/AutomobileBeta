@@ -1,35 +1,32 @@
 import React, { useEffect, useState } from 'react';
 
 function SaleForm() {
-    const [automobile, setAutomobile] = useState('');
-    const [salesperson, setSalesperson] = useState('');
-    const [customer, setCustomer] = useState('');
-    const [price, setPrice] = useState('');
-    const [automobiles, setAutomobiles] = useState([]);
-    const [salespeople, setSalespeople] = useState([]);
-    const [customers, setCustomers] = useState([]);
 
+    const [automobile, setAutomobile] = useState('');
     const handleAutomobileChange = (event) => {
         const value = event.target.value;
         setAutomobile(value);
     }
 
+    const [salesperson, setSalesperson] = useState('');
     const handleSalespersonChange = (event) => {
         const value = event.target.value;
         setSalesperson(value);
     }
 
+    const [customer, setCustomer] = useState('');
     const handleCustomerChange = (event) => {
         const value = event.target.value;
         setCustomer(value);
     }
 
-
+    const [price, setPrice] = useState('');
     const handlePriceChange = (event) => {
         const value = event.target.value;
         setPrice(value);
     }
 
+    const [automobiles, setAutomobiles] = useState([]);
     const getAutomobiles = async () => {
         const response = await fetch('http://localhost:8100/api/automobiles/')
         if (response.ok) {
@@ -39,7 +36,7 @@ function SaleForm() {
         }
     }
 
-
+    const [customers, setCustomers] = useState([]);
     const getCustomers = async () => {
         const response = await fetch('http://localhost:8090/api/customers/');
         if (response.ok) {
@@ -48,6 +45,7 @@ function SaleForm() {
         }
     }
 
+    const [salespeople, setSalespeople] = useState([]);
     const getSalespeople = async () => {
         const response = await fetch('http://localhost:8090/api/salespeople/');
         if (response.ok) {
@@ -65,7 +63,6 @@ function SaleForm() {
         data.salesperson = salesperson;
         data.customer = customer;
         data.price = price;
-        console.log(data)
 
         const salesUrl = 'http://localhost:8090/api/sales/'
         const fetchConfig = {
@@ -79,7 +76,6 @@ function SaleForm() {
         const response = await fetch(salesUrl, fetchConfig);
         if (response.ok) {
             const newSales = await response.json();
-            console.log(newSales);
 
             setAutomobile('');
             setSalesperson('');

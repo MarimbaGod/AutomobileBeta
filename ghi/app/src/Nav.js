@@ -15,6 +15,9 @@ function Nav() {
               <a className="btn btn-secondary dropdown-toggle" href="/" role="button" data-bs-toggle="dropdown" aria-expanded="false">Inventory</a>
               <ul className="dropdown-menu">
                 <li><NavLink className="dropdown-item" to="/automobiles">Automobiles</NavLink></li>
+                <li><NavLink className="dropdown-item" to="/automobiles/new">Add Automobile</NavLink></li>
+                <li><NavLink className="dropdown-item" to="/models">Models</NavLink></li>
+
               </ul>
             </li>
 
@@ -43,6 +46,21 @@ function Nav() {
               </ul>
             </li>
 
+            <li className="nav-item dropdown">
+              <a className="btn btn-secondary dropdown-toggle" href="/" role="button" data-bs-toggle="dropdown" aria-expanded="false">Technicians</a>
+              <ul className="dropdown-menu">
+                <li><NavLink className="dropdown-item" to="/technicians">Technician</NavLink></li>
+                <li><NavLink className="dropdown-item" to="/technicians/new">Add New Technician</NavLink></li>
+              </ul>
+            </li>
+
+            <li className="nav-item dropdown">
+              <a className="btn btn-secondary dropdown-toggle" href="/" role="button" data-bs-toggle="dropdown" aria-expanded="false">Service Appointments</a>
+              <ul className="dropdown-menu">
+                <li><NavLink className="dropdown-item" to="/appointments">Service Appointments</NavLink></li>
+                <li><NavLink className="dropdown-item" to="/appointments/new">Schedule a New Appointment</NavLink></li>
+              </ul>
+            </li>
           </ul>
         </div>
       </div>
