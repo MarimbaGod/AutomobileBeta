@@ -28,5 +28,16 @@ class Appointment(models.Model):
         related_name="appointments"
     )
 
+
+    def cancel(self):
+        status = "CANCELLED"
+        self.status = status
+        self.save()
+
+    def finish(self):
+        status = "FINISHED"
+        self.status = status
+        self.save()
+
     def __str__(self):
         return f"{self.customer}"

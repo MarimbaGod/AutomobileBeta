@@ -11,6 +11,7 @@ import SalesList from './SalesList';
 import TechnicianForm from './TechnicianForm';
 import TechniciansList from './TechniciansList';
 import AppointmentForm from './AppointmentForm';
+import AppointmentList from './AppointmentList';
 
 function App() {
 
@@ -74,6 +75,7 @@ function App() {
           </Route>
           <Route path="appointments">
             <Route path="new" element={<AppointmentForm />} />
+            <Route index element={<AppointmentList />} />
           </Route>
         </Routes>
 

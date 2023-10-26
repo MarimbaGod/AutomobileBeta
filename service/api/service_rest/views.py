@@ -101,12 +101,12 @@ def delete_technician(request, pk):
 
 
 @require_http_methods(["GET", "POST"])
-def list_appointments(request, id=None):
+def list_appointments(request):
     if request.method == "GET":
-        if id is not None:
-            appointments = Appointment.objects.filter(technician=id)
-        else:
-            appointments = Appointment.objects.all()
+        # if id is not None:
+        # appointments = Appointment.objects.filter(technician=id)
+        # else:
+        appointments = Appointment.objects.all()
 
         return JsonResponse(
             {"appointments": appointments},
@@ -116,14 +116,17 @@ def list_appointments(request, id=None):
     else:
         content = json.loads(request.body)
         try:
-            technician_href = content["technician"]
-            technician = Technician.objects.get(id=technician_href)
-            content["technician"] = technician
-            content["status"] = content.get("status", "ACTIVE") #active is default
 
+
+            technician = Technician.objects.get(id=content['technician'])
+            content['technician'] = technician
             appointment = Appointment.objects.create(**content)
-            data = AppointmentDetailEncoder().serialize(appointment)
-            return JsonResponse(data, safe=False)
+
+            return JsonResponse(
+                {"appointment": appointment},
+                encoder=AppointmentDetailEncoder,
+                safe=False,
+            )
 
         except (KeyError, ValueError) as error:
             return JsonResponse({"message": str(error)}, status=400)
@@ -134,3 +137,24 @@ def delete_appointment(request, pk):
     if request.method == "DELETE":
         count, _ = Appointment.objects.filter(id=pk).delete()
         return JsonResponse({"deleted": count > 0})
+
+
+@require_http_methods(["PUT"])
+def appointment_cancel(request, pk):
+    appointment = Appointment.objects.get(id=pk)
+    appointment.cancel()
+    return JsonResponse(
+        appointment,
+        encoder=AppointmentDetailEncoder,
+        safe=False
+    )
+
+@require_http_methods(["PUT"])
+def appointment_finish(reqpest, pk):
+    appointment = Appointment.objects.get(id=pk)
+    appointment.finish()
+    return JsonResponse(
+        appointment,
+        encoder=AppointmentDetailEncoder,
+        safe=False,
+    )
