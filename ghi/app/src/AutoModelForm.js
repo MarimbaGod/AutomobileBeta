@@ -70,19 +70,19 @@ function AutoModelForm() {
             <div className="row">
                 <div className="offset-3 col-6">
                     <div className="shadow p-4 mt-4">
-                        <h1>Create a vehicle model</h1>
+                        <h1>Add a Vehicle Model</h1>
                         <form onSubmit={handleVehicleSubmit} id="create-vehicle-model-form">
                             <div className="form-floating mb-3">
                                 <input value={modelName} onChange={modelChange} placeholder="Model name..." required type="text" name="model" id="model" className="form-control" />
-                                <label htmlFor="model">Model name...</label>
+                                <label htmlFor="model">Model Name</label>
                             </div>
                             <div className="form-floating mb-3">
                                 <input value={picture} onChange={pictureChange} placeholder="Picture URL..." required type="text" name="picture" id="picture" className="form-control" />
-                                <label htmlFor="picture">Picture URL...</label>
+                                <label htmlFor="picture">Picture URL</label>
                             </div>
                             <div className="mb-3">
                                 <select value={manufacturer} onChange={manufacturerChange} placeholder="" name="manufacturer" id="manufacturer" className="form-select" >
-                                    <option value="">Choose a manufacturer...</option>
+                                    <option value="">Choose a Manufacturer</option>
                                     {manufacturers.map(manufacturer => {
                                         return (
                                             <option key={manufacturer.id} value={manufacturer.id}>
