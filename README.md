@@ -56,6 +56,355 @@ The Vehicle Model retrieves information from the manufacturer model to create th
 
 ## Inventory Microservice API
 
+Data can be created, viewed, and deleted on the front-end applications, but can also be done using Insomnia. Microservice API is located on port 8100.
+
+### Manufacturer API
+
+| Action | Method | URL |
+| :---: | :---: | :---: |
+| Manufacturer List | GET | http://localhost:8100/api/manufacturers/ |
+| Get Specific Manufacturer | GET | http://localhost:8100/api/manufacturers/id/ |
+| Create a Manufacturer | POST | http://localhost:8100/api/manufacturers/ |
+| Update a Manufacturer | PUT | 	http://localhost:8100/api/manufacturers/id/ |
+| Delete a Manufacturer | DELETE | 	http://localhost:8100/api/manufacturers/id/ |
+
+Example GET output:
+```
+Manufacturer List
+{
+	"manufacturers": [
+		{
+			"href": "/api/manufacturers/1/",
+			"id": 1,
+			"name": "Toyota"
+		}
+	]
+}
+
+Specific Manufacturer
+{
+	"href": "/api/manufacturers/1/",
+	"id": 1,
+	"name": "Toyota"
+}
+```
+
+Example POST input and output:
+```
+input
+{
+	"name": "Toyota"
+}
+
+output
+{
+	"href": "/api/manufacturers/1/",
+	"id": 1,
+	"name": "Toyota"
+}
+```
+
+Example PUT input and output:
+```
+input
+{
+	"name": "Lexus"
+}
+
+output
+{
+	"href": "/api/manufacturers/4/",
+	"id": 4,
+	"name": "Lexus"
+}
+```
+
+Example Delete output:
+```
+if id exists
+{
+	"id": null,
+	"name": "Lexus"
+}
+
+if id does not exist
+{
+	"message": "Does not exist"
+}
+```
+
+### Vehicle Models API
+
+| Action | Method | URL |
+| :---: | :---: | :---: |
+| Model List | GET | http://localhost:8100/api/models/ |
+| Get Specific Model | GET | http://localhost:8100/api/models/id/ |
+| Create a Model | POST | http://localhost:8100/api/models/ |
+| Update a Model | PUT | 	http://localhost:8100/api/models/id/ |
+| Delete a Model | DELETE | 	http://localhost:8100/api/models/id/ |
+
+Example GET output:
+```
+Model List
+{
+	"models":
+
+			"href": "/api/models/1/",
+			"id": 1,
+			"name": "Camry",
+			"picture_url": "example url",
+			"manufacturer": {
+				"href": "/api/manufacturers/1/",
+				"id": 1,
+				"name": "Toyota"
+			}
+}
+
+Specific Model
+{
+	"href": "/api/models/1/",
+	"id": 1,
+	"name": "Camry",
+	"picture_url": "example url",
+	"manufacturer": {
+		"href": "/api/manufacturers/1/",
+		"id": 1,
+		"name": "Toyota"
+	}
+}
+```
+
+Example POST input and output:
+```
+input
+{
+	"name": "Camry",
+	"picture_url": "example url",
+	"manufacturer_id": 1
+}
+
+output
+{
+	"href": "/api/models/8/",
+	"id": 8,
+	"name": "Camry",
+	"picture_url": "example url",
+	"manufacturer": {
+		"href": "/api/manufacturers/1/",
+		"id": 1,
+		"name": "Toyota"
+	}
+}
+```
+
+Fields able to be updated:
+```
+"name"
+"picture_url"
+```
+You cannot update a vehicle model's manufacturer.
+
+
+Example PUT input and output:
+```
+input
+{
+	"name": "RAV4",
+	"picture_url": "new example url"
+}
+
+output
+{
+	"href": "/api/models/8/",
+	"id": 8,
+	"name": "RAV4",
+	"picture_url": "new example url",
+	"manufacturer": {
+		"href": "/api/manufacturers/1/",
+		"id": 1,
+		"name": "Toyota"
+	}
+}
+```
+
+Example DELETE output:
+```
+id exists
+{
+	"id": null,
+	"name": "RAV4",
+	"picture_url": "example url",
+	"manufacturer": {
+		"href": "/api/manufacturers/1/",
+		"id": 1,
+		"name": "Toyota"
+	}
+}
+
+id does not exist
+{
+	"message": "Does not exist"
+}
+```
+
+### Automobile API
+
+URLs for automobiles are not called by their "id", but rather their "VIN". Please use their "VIN" when referencing them in URLs.
+
+**VIN has a max of 17 characters**
+
+| Action | Method | URL |
+| :---: | :---: | :---: |
+| Automobile List | GET | http://localhost:8100/api/automobiles/ |
+| Get Specific Automobile | GET | http://localhost:8100/api/automobiles/vin/ |
+| Create a Automobile | POST | http://localhost:8100/api/automobiles/ |
+| Update a Automobile | PUT | 	http://localhost:8100/api/automobiles/vin/ |
+| Delete a Automobile | DELETE | 	http://localhost:8100/api/automobiles/vin/ |
+
+
+Example GET output:
+```
+Automobile list
+{
+	"autos": [
+		{
+			"href": "/api/automobiles/TEST2/",
+			"id": 3,
+			"color": "Silver",
+			"year": 2021,
+			"vin": "TEST2",
+			"model": {
+				"href": "/api/models/1/",
+				"id": 1,
+				"name": "Camry",
+				"picture_url": "example url",
+				"manufacturer": {
+					"href": "/api/manufacturers/1/",
+					"id": 1,
+					"name": "Toyota"
+				}
+			},
+
+Specific Automobile
+{
+	"href": "/api/automobiles/TEST2/",
+	"id": 3,
+	"color": "Silver",
+	"year": 2021,
+	"vin": "TEST2",
+	"model": {
+		"href": "/api/models/1/",
+		"id": 1,
+		"name": "Camry",
+		"picture_url": "example url",
+		"manufacturer": {
+			"href": "/api/manufacturers/1/",
+			"id": 1,
+			"name": "Toyota"
+		}
+	},
+	"sold": false
+}
+```
+
+Example POST input and output:
+```
+input
+{
+	"color": "Silver",
+	"year": 2021,
+	"vin": "12345678901234567",
+	"model_id": 1
+}
+
+output
+{
+	"href": "/api/automobiles/12345678901234567/",
+	"id": 9,
+	"color": "Silver",
+	"year": 2021,
+	"vin": "12345678901234567",
+	"model": {
+		"href": "/api/models/1/",
+		"id": 1,
+		"name": "Camry",
+		"picture_url": "example url",
+		"manufacturer": {
+			"href": "/api/manufacturers/1/",
+			"id": 1,
+			"name": "Toyota"
+		}
+	},
+	"sold": false
+}
+```
+
+Fields able to be updated:
+```
+"color"
+"year"
+"sold"
+```
+
+Example PUT input and output
+```
+input
+{
+	"color": "Black",
+	"year": "2023",
+	"sold": true
+}
+
+output
+{
+	"href": "/api/automobiles/12345678901234567/",
+	"id": 9,
+	"color": "Black",
+	"year": "2023",
+	"vin": "12345678901234567",
+	"model": {
+		"href": "/api/models/1/",
+		"id": 1,
+		"name": "Camry",
+		"picture_url": "example url",
+		"manufacturer": {
+			"href": "/api/manufacturers/1/",
+			"id": 1,
+			"name": "Toyota"
+		}
+	},
+	"sold": true
+}
+```
+
+Example DELETE output:
+```
+VIN exists
+{
+	"href": "/api/automobiles/12345678901234567/",
+	"id": null,
+	"color": "Black",
+	"year": 2023,
+	"vin": "12345678901234567",
+	"model": {
+		"href": "/api/models/1/",
+		"id": 1,
+		"name": "Camry",
+		"picture_url": "https://images.unsplash.com/photo-1624578571415-09e9b1991929?auto=format&fit=crop&q=80&w=1290&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+		"manufacturer": {
+			"href": "/api/manufacturers/1/",
+			"id": 1,
+			"name": "Toyota"
+		}
+	},
+	"sold": true
+}
+
+VIN does not exist
+{
+	"message": "Does not exist"
+}
+```
 
 
 ## Service microservice
@@ -97,7 +446,7 @@ The Sale model gets data from all of the other models: AutomobileVO, Salesperson
 
 ## Sales Microservice API
 
-Data can be created, viewed, and deleted on the front-end applications, but can also be done using Insomnia. Microservice is located on port 8090.
+Data can be created, viewed, and deleted on the front-end applications, but can also be done using Insomnia. Microservice API is located on port 8090.
 
 ### Salespeople API
 **The "id" in the url is the "id" value of the salesperson, NOT the "employee_id".**
