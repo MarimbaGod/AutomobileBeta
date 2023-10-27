@@ -12,12 +12,43 @@ import TechnicianForm from './TechnicianForm';
 import TechniciansList from './TechniciansList';
 import AppointmentForm from './AppointmentForm';
 import AppointmentList from './AppointmentList';
+import ServiceHistory from './ServiceHistory';
 
 function App() {
 
   const [salespeople, setSalespeople] = useState([]);
   const [customer, setCustomer] = useState([]);
   const [sales, setSales] = useState([]);
+  const [appointments, setAppointments] = useState([]);
+  const [automobiles, setAutomobiles] = useState([]);
+  const [technicians, setTechnicians] = useState([])
+
+  async function getAppointments() {
+    const url = "http://localhost:8080/api/appointments/";
+    const response = await fetch(url);
+    if (response.ok) {
+      const {appointments} = await response.json()
+      setAppointments(appointments)
+    }
+  }
+
+  async function getAutomobiles() {
+    const url= "http://localhost:8100/api/automobiles/";
+    const response = await fetch(url);
+    if (response.ok) {
+      const {automobiles} = await response.json()
+      setAutomobiles(automobiles)
+    }
+  }
+
+  async function getTechnicians() {
+    const url = "http://localhost:8080/api/technicians/";
+    const response = await fetch(url);
+    if (response.ok) {
+      const {technicians} = await response.json();
+      setTechnicians(technicians);
+    }
+  }
 
   async function getSalespeople() {
     const url = 'http://localhost:8090/api/salespeople/';
@@ -51,9 +82,12 @@ function App() {
 
 
   useEffect(() => {
+    getAutomobiles();
     getSalespeople();
+    getTechnicians();
     getCustomer();
     getSales();
+    getAppointments();
   }, []);
 
 
@@ -77,6 +111,7 @@ function App() {
             <Route path="new" element={<AppointmentForm />} />
             <Route index element={<AppointmentList />} />
           </Route>
+          <Route path="servicehistory" element={<ServiceHistory appointments={appointments} technicians={technicians} automobiles={automobiles}/>} />
         </Routes>
 
       </div>
