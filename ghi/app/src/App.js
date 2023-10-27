@@ -18,8 +18,10 @@ import AppointmentList from './AppointmentList';
 import SalespersonHistory from './SalespersonHistory';
 import AutoModelForm from './AutoModelForm';
 import AutomobileForm from './AutomobileForm';
-
 import ServiceHistory from './ServiceHistory';
+import ManufacturerForm from './ManufacturerForm';
+import ManufacturerList from './ManufacturerList';
+import AutoModelsList from './AutoModelsList';
 
 function App() {
 
@@ -30,6 +32,18 @@ function App() {
   const [automobiles, setAutomobiles] = useState([]);
   const [technicians, setTechnicians] = useState([]);
   const [models, setModels] = useState([]);
+  const [manufacturers, setManufacturers] = useState([]);
+
+
+  async function getManufacturers() {
+    const url = "http://localhost:8100/api/manufacturers/";
+    const response = await fetch(url);
+    if (response.ok) {
+      const {manufacturers} = await response.json()
+      setManufacturers(manufacturers)
+    }
+  }
+
 
   async function getAppointments() {
     const url = "http://localhost:8080/api/appointments/";
@@ -115,6 +129,7 @@ function App() {
     getAppointments();
     getAutomobiles();
     getModels();
+    getManufacturers();
   }, []);
 
 
@@ -134,7 +149,8 @@ function App() {
           <Route path="sales/new" element={<SaleForm getSales={getSales} />} />
           <Route path="automobiles" element={<AutomobileList automobiles={automobiles} />} />
           <Route path="automobiles/new" element={<AutomobileForm getAutomobiles={getAutomobiles} />} />
-          <Route path="models" element={<AutoModelForm getModels={getModels} />} />
+          <Route path="models/new" element={<AutoModelForm getModels={getModels} />} />
+          <Route path="models" element={<AutoModelsList />} />
           <Route path="technicians">
             <Route index element={<TechniciansList />} />
             <Route path="new" element={<TechnicianForm />} />
@@ -142,6 +158,10 @@ function App() {
           <Route path="appointments">
             <Route path="new" element={<AppointmentForm />} />
             <Route index element={<AppointmentList />} />
+          </Route>
+          <Route path="manufacturers">
+            <Route path="new" element={<ManufacturerForm />} />
+            <Route index element={<ManufacturerList />} />
           </Route>
           <Route path="servicehistory" element={<ServiceHistory appointments={appointments} technicians={technicians} automobiles={automobiles}/>} />
         </Routes>
