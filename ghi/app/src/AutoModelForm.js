@@ -2,21 +2,21 @@ import React, { useState, useEffect } from 'react';
 
 
 function AutoModelForm() {
-    const [modelName, setVehicle] = useState('');
-    const [picture, setPicture] = useState('');
-    const [manufacturers, setManufacturers] = useState([]);
-    const [manufacturer, setManufacturer] = useState('');
 
+    const [modelName, setVehicle] = useState('');
     const modelChange = (event) => {
         const value = event.target.value;
         setVehicle(value);
     }
 
+    const [picture, setPicture] = useState('');
     const pictureChange = (event) => {
         const value = event.target.value;
         setPicture(value);
     }
 
+    const [manufacturer, setManufacturer] = useState('');
+    const [manufacturers, setManufacturers] = useState([]);
     const manufacturerChange = (event) => {
         const value = event.target.value;
         setManufacturer(value)
@@ -41,8 +41,6 @@ function AutoModelForm() {
 
         const response = await fetch(modelUrl, fetchConfig);
         if (response.ok) {
-            const newModel = await response.json();
-            console.log(newModel);
 
             setVehicle('');
             setPicture('');
@@ -73,11 +71,11 @@ function AutoModelForm() {
                         <h1>Add Vehicle Model</h1>
                         <form onSubmit={handleVehicleSubmit} id="create-vehicle-model-form">
                             <div className="form-floating mb-3">
-                                <input value={modelName} onChange={modelChange} placeholder="Model name..." required type="text" name="model" id="model" className="form-control" />
+                                <input value={modelName} onChange={modelChange} placeholder="Model name" required type="text" name="model" id="model" className="form-control" />
                                 <label htmlFor="model">Model Name</label>
                             </div>
                             <div className="form-floating mb-3">
-                                <input value={picture} onChange={pictureChange} placeholder="Picture URL..." required type="text" name="picture" id="picture" className="form-control" />
+                                <input value={picture} onChange={pictureChange} placeholder="Picture URL" required type="text" name="picture" id="picture" className="form-control" />
                                 <label htmlFor="picture">Picture URL</label>
                             </div>
                             <div className="mb-3">

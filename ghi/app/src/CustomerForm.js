@@ -39,7 +39,6 @@ function CustomerForm() {
         data.last_name = lastName;
         data.address = address;
         data.phone_number = phoneNumber;
-        console.log(data);
 
         const customersUrl = 'http://localhost:8090/api/customers/'
         const fetchConfig = {
@@ -51,8 +50,6 @@ function CustomerForm() {
         };
         const response = await fetch(customersUrl, fetchConfig);
         if (response.ok) {
-            const newCustomer = await response.json();
-            console.log(newCustomer);
 
             setFirstName('');
             setLastName('');
@@ -74,15 +71,15 @@ function CustomerForm() {
                         </div>
                         <div className="form-floating mb-3">
                             <input onChange={handleLastNameChange} value={lastName} placeholder="Last Name" required type="text" name="last name" id="last name" className="form-control" />
-                            <label htmlFor="Last Name">Last Name</label>
+                            <label htmlFor="last name">Last Name</label>
                         </div>
                         <div className="form-floating mb-3">
                             <input onChange={handleAddressChange} value={address} placeholder="Address" required type="text" name="address" id="address" className="form-control" />
-                            <label htmlFor="Address">Address</label>
+                            <label htmlFor="address">Address</label>
                         </div>
                         <div className="form-floating mb-3">
                             <input onChange={handlePhoneNumberChange} value={phoneNumber} placeholder="Phone Number" required type="text" name="phone number" id="phone number" className="form-control" />
-                            <label htmlFor="Phone Number">Phone Number</label>
+                            <label htmlFor="phone number">Phone Number</label>
                         </div>
                         <button className="btn btn-primary">Create Customer</button>
                     </form>
