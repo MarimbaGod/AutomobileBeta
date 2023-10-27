@@ -95,7 +95,7 @@ function SaleForm() {
         <div className="row">
             <div className="offset-3 col-6">
                 <div className="shadow p-4 mt-4">
-                    <h1>Create a Sale</h1>
+                    <h1>Create Sale</h1>
                     <form onSubmit={handleSubmit} id="create-sales-form">
                         <div className="form-floating mb-3">
                             <select onChange={handleAutomobileChange} value={automobile} placeholder="Automobile" required type="text" name="automobile" id="automobile" className="form-select">
@@ -137,7 +137,7 @@ function SaleForm() {
                             <input onChange={handlePriceChange} value={price} placeholder="price" required type="text" name="price" id="price" className="form-control" />
                             <label htmlFor="Phone Number">Price</label>
                         </div>
-                        <button className="btn btn-primary">Create a Sale</button>
+                        <button className="btn btn-primary">Create Sale</button>
                     </form>
                 </div>
             </div>

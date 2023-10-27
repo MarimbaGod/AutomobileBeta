@@ -70,7 +70,7 @@ function AutoModelForm() {
             <div className="row">
                 <div className="offset-3 col-6">
                     <div className="shadow p-4 mt-4">
-                        <h1>Add a Vehicle Model</h1>
+                        <h1>Add Vehicle Model</h1>
                         <form onSubmit={handleVehicleSubmit} id="create-vehicle-model-form">
                             <div className="form-floating mb-3">
                                 <input value={modelName} onChange={modelChange} placeholder="Model name..." required type="text" name="model" id="model" className="form-control" />
@@ -92,7 +92,7 @@ function AutoModelForm() {
                                     })}
                                 </select>
                             </div>
-                            <button className="btn btn-primary">Create</button>
+                            <button className="btn btn-primary">Create Model</button>
                         </form>
                     </div>
                 </div>
