@@ -6,7 +6,7 @@ function ServiceHistory() {
 
 
     const handleVinChange = (event) => {
-        const value = event.targe.value;
+        const value = event.target.value;
         setVin(value);
     }
 
@@ -19,7 +19,7 @@ function ServiceHistory() {
           const {appointments} = await response.json()
           setAppointments(appointments)
         }
-      }
+    }
 
     useEffect(() => {
         getAppointments();

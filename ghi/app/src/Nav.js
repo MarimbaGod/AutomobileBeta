@@ -16,7 +16,10 @@ function Nav() {
               <ul className="dropdown-menu">
                 <li><NavLink className="dropdown-item" to="/automobiles">Automobiles</NavLink></li>
                 <li><NavLink className="dropdown-item" to="/automobiles/new">Add Automobile</NavLink></li>
-                <li><NavLink className="dropdown-item" to="/models">Add Model</NavLink></li>
+                <li><NavLink className="dropdown-item" to="/models">Models</NavLink></li>
+                <li><NavLink className="dropdown-item" to="/models/new">Add a Model</NavLink></li>
+                <li><NavLink className="dropdown-item" to="/manufacturers">Manufacturers</NavLink></li>
+                <li><NavLink className="dropdown-item" to="/manufacturers/new">Add a Manufacturer</NavLink></li>
 
               </ul>
             </li>
