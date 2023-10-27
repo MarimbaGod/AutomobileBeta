@@ -19,7 +19,7 @@ class AutomobileVO(models.Model):
 class Appointment(models.Model):
     date_time = models.DateTimeField()
     reason = models.TextField()
-    status = models.CharField(max_length=200)
+    status = models.CharField(max_length=200, default="ACTIVE")
     vin = models.CharField(max_length=17)
     customer = models.CharField(max_length=200)
     technician = models.ForeignKey(

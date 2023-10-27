@@ -61,6 +61,12 @@ function Nav() {
                 <li><NavLink className="dropdown-item" to="/appointments/new">Schedule a New Appointment</NavLink></li>
               </ul>
             </li>
+            <li className="nav-item dropdown">
+              <a className="btn btn-secondary dropdown-toggle" href="/" role="button" data-bs-toggle="dropdown" aria-expanded="false">Service History</a>
+              <ul className="dropdown-menu">
+                <li><NavLink className="dropdown-item" to="/servicehistory">Service History</NavLink></li>
+              </ul>
+            </li>
           </ul>
         </div>
       </div>

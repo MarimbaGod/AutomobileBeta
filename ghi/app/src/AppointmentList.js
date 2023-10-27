@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 
-function AppointmentList(props) {
+function AppointmentList() {
     const [appointments, setAppointments] = useState([]);
 
     const fetchData = async () => {
