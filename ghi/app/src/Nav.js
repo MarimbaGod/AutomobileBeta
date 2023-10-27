@@ -12,10 +12,21 @@ function Nav() {
           <ul className="navbar-nav me-auto mb-2 mb-lg-0">
 
             <li className="nav-item dropdown">
+              <a className="btn btn-secondary dropdown-toggle" href="/" role="button" data-bs-toggle="dropdown" aria-expanded="false">Inventory</a>
+              <ul className="dropdown-menu">
+                <li><NavLink className="dropdown-item" to="/automobiles">Automobiles</NavLink></li>
+                <li><NavLink className="dropdown-item" to="/automobiles/new">Add Automobile</NavLink></li>
+                <li><NavLink className="dropdown-item" to="/models">Add a Model</NavLink></li>
+
+              </ul>
+            </li>
+
+            <li className="nav-item dropdown">
               <a className="btn btn-secondary dropdown-toggle" href="/" role="button" data-bs-toggle="dropdown" aria-expanded="false">Salespeople</a>
               <ul className="dropdown-menu">
                 <li><NavLink className="dropdown-item" to="/salespeople">Salespeople</NavLink></li>
                 <li><NavLink className="dropdown-item" to="/salespeople/new">Add New Salesperson</NavLink></li>
+                <li><NavLink className="dropdown-item" to="/salespeople/history">Salesperson History</NavLink></li>
               </ul>
             </li>
 
@@ -31,6 +42,7 @@ function Nav() {
               <a className="btn btn-secondary dropdown-toggle" href="/" role="button" data-bs-toggle="dropdown" aria-expanded="false">Sales</a>
               <ul className="dropdown-menu">
                 <li><NavLink className="dropdown-item" to="/sales">Sales</NavLink></li>
+                <li><NavLink className="dropdown-item" to="/sales/new">Create a Sale</NavLink></li>
               </ul>
             </li>
 
