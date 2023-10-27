@@ -28,7 +28,8 @@ function App() {
   const [sales, setSales] = useState([]);
   const [appointments, setAppointments] = useState([]);
   const [automobiles, setAutomobiles] = useState([]);
-  const [technicians, setTechnicians] = useState([])
+  const [technicians, setTechnicians] = useState([]);
+  const [models, setModels] = useState([]);
 
   async function getAppointments() {
     const url = "http://localhost:8080/api/appointments/";
@@ -56,8 +57,6 @@ function App() {
       setTechnicians(technicians);
     }
   }
-  const [automobiles, setAutomobiles] = useState([]);
-  const [models, setModels] = useState([]);
 
   async function getSalespeople() {
     const url = 'http://localhost:8090/api/salespeople/';
