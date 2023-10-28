@@ -469,7 +469,7 @@ This microservice contains 4 models:
     * phone_number
 
 1. Sale
-    * price
+    * price (must be positive integer)
     * automobile (foreign key)
     * salesperson (foreign key)
     * customer (foreign key)
