@@ -39,7 +39,7 @@ function App() {
     const url = "http://localhost:8100/api/manufacturers/";
     const response = await fetch(url);
     if (response.ok) {
-      const {manufacturers} = await response.json()
+      const { manufacturers } = await response.json()
       setManufacturers(manufacturers)
     }
   }
@@ -49,16 +49,16 @@ function App() {
     const url = "http://localhost:8080/api/appointments/";
     const response = await fetch(url);
     if (response.ok) {
-      const {appointments} = await response.json()
+      const { appointments } = await response.json()
       setAppointments(appointments)
     }
   }
 
   async function getAutomobiles() {
-    const url= "http://localhost:8100/api/automobiles/";
+    const url = "http://localhost:8100/api/automobiles/";
     const response = await fetch(url);
     if (response.ok) {
-      const {automobiles} = await response.json()
+      const { automobiles } = await response.json()
       setAutomobiles(automobiles)
     }
   }
@@ -67,7 +67,7 @@ function App() {
     const url = "http://localhost:8080/api/technicians/";
     const response = await fetch(url);
     if (response.ok) {
-      const {technicians} = await response.json();
+      const { technicians } = await response.json();
       setTechnicians(technicians);
     }
   }
@@ -149,8 +149,8 @@ function App() {
           <Route path="sales/new" element={<SaleForm getSales={getSales} />} />
           <Route path="automobiles" element={<AutomobileList automobiles={automobiles} />} />
           <Route path="automobiles/new" element={<AutomobileForm getAutomobiles={getAutomobiles} />} />
+          <Route path="models" element={<AutoModelsList models={models} />} />
           <Route path="models/new" element={<AutoModelForm getModels={getModels} />} />
-          <Route path="models" element={<AutoModelsList />} />
           <Route path="technicians">
             <Route index element={<TechniciansList />} />
             <Route path="new" element={<TechnicianForm />} />
@@ -163,7 +163,7 @@ function App() {
             <Route path="new" element={<ManufacturerForm />} />
             <Route index element={<ManufacturerList />} />
           </Route>
-          <Route path="servicehistory" element={<ServiceHistory appointments={appointments} technicians={technicians} automobiles={automobiles}/>} />
+          <Route path="servicehistory" element={<ServiceHistory appointments={appointments} technicians={technicians} automobiles={automobiles} />} />
         </Routes>
 
       </div>

@@ -30,7 +30,6 @@ function NewSalespeople() {
         data.first_name = firstName;
         data.last_name = lastName;
         data.employee_id = employeeId;
-        console.log(data);
 
         const salespeopleUrl = 'http://localhost:8090/api/salespeople/'
         const fetchConfig = {
@@ -42,8 +41,6 @@ function NewSalespeople() {
         };
         const response = await fetch(salespeopleUrl, fetchConfig);
         if (response.ok) {
-            const newSalesperson = await response.json();
-            console.log(newSalesperson);
 
             setFirstName('');
             setLastName('');
@@ -64,11 +61,11 @@ function NewSalespeople() {
                         </div>
                         <div className="form-floating mb-3">
                             <input onChange={handleLastNameChange} value={lastName} placeholder="Last Name" required type="text" name="last name" id="last name" className="form-control" />
-                            <label htmlFor="Last Name">Last Name</label>
+                            <label htmlFor="last name">Last Name</label>
                         </div>
                         <div className="form-floating mb-3">
                             <input onChange={handleEmployeeIdChange} value={employeeId} placeholder="Employee id" required type="text" name="employee id" id="employee id" className="form-control" />
-                            <label htmlFor="Employee Id">Employee Id</label>
+                            <label htmlFor="employee id">Employee Id</label>
                         </div>
                         <button className="btn btn-primary">Create Salesperson</button>
                     </form>
