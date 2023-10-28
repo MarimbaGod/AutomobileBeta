@@ -93,15 +93,6 @@ function ServiceHistory() {
                                 return(
                                     <tr key={appointment.id} value={appointment.id}>
                                         <td>{appointment.vin}</td>
-                                        <td>
-                                            {automobiles.map(automobile => {
-                                                if (appointment.vin === automobile.vin) {
-                                                    return "Yes"
-                                                } else {
-                                                    return null
-                                                }
-                                            })}
-                                        </td>
                                         <td>{appointment.customer}</td>
                                         <td>{dateTime.toLocaleDateString()}</td>
                                         <td>{dateTime.toLocaleTimeString()}</td>

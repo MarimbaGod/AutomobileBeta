@@ -109,15 +109,6 @@ function AppointmentList() {
                                 <td>{appointment.customer}</td>
                                 <td>{date}</td>
                                 <td>{time}</td>
-                                <td>
-                                            {automobiles.map(automobile => {
-                                                if (appointment.vin === automobile.vin) {
-                                                    return "Yes"
-                                                } else {
-                                                    return null
-                                                }
-                                            })}
-                                        </td>
                                 <td>{appointment.technician.first_name} {appointment.technician.last_name}</td>
                                 <td>{appointment.reason}</td>
                                 <td>
