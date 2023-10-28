@@ -408,7 +408,7 @@ VIN does not exist
 
 
 ## Service microservice
-The Service microservice handles the scheduling of service appointments for customers' cars. It manages the VIP status, as well as the status of the appointment, and the reason for the service.
+The Service microservice handles the scheduling of service appointments for customers' cars. It manages the VIP status marked with "Yes", as well as the status of the appointment, and the reason for the service.
 
 This microservice stores the Technicians who will work the appointments, and can be accessed through the url:
 Technician List: http://localhost:3000/technicians/list/
