@@ -408,9 +408,44 @@ VIN does not exist
 
 
 ## Service microservice
+The Service microservice handles the scheduling of service appointments for customers' cars. It manages the VIP status, as well as the status of the appointment, and the reason for the service.
 
-Explain your models and integration with the inventory
-microservice, here.
+This microservice stores the Technicians who will work the appointments, and can be accessed through the url:
+Technician List: http://localhost:3000/technicians/list/
+
+To add a new technician to your roster:
+Create Technician: http://localhost:3000/technicians/create/
+
+To view all active appointments:
+Appointment List: http://localhost:3000/appointments/list/
+
+To schedule a new Appointment:
+Create Appointment: http://localhost:3000/appointments/create/
+
+To view all past appointments:
+Service History List: http://localhost:3000/appointments/history/
+This page contains a VIN Search function to find specific Service History
+
+The Service Microservice has three models:
+
+AutomobileVO: A Value object of Automobile that has the fields:
+vin: Primarily used to determine VIP Status of Customers.
+sold: tracks whether the AutomobileVO was sold by us.
+
+Technician:
+first_name: Simple Character field to store the technician's first name.
+last_name: Another Character field storing the technician's last name.
+employee_id: A character field storing the employee's id number
+
+Appointment:
+date_time: This is a DateTimeField() to store the date and time of the appointment
+reason: This is a text field to store the reason for the appointment
+status: This is to track ACTIVE, FINISHED, or CANCELLED appointments
+vin: A character field with a maximum length of 17, like all VIN numbers.
+customer: A character field for the name of the customer
+technician: A character field with the name of the Technician assigned to the service appointment
+
+
 
 ## Sales microservice
 

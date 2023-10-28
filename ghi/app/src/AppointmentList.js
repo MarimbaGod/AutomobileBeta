@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 
 function AppointmentList() {
     const [appointments, setAppointments] = useState([]);
+    const [automobiles, setAutomobiles] = useState('');
 
     const fetchData = async () => {
         const url = "http://localhost:8080/api/appointments/";
@@ -14,24 +15,33 @@ function AppointmentList() {
         }
     }
 
-    async function isVip() {
-        const autoUrl = "http://localhost:8100/api/automobiles/";
-        const apptUrl = "http://localhost:8080/api/appointments/";
-        const autoResponse = await fetch(autoUrl);
-        const apptResponse = await fetch(apptUrl);
-
-        const {autos} = await autoResponse.json();
-        const {appointments} = await apptResponse.json();
-
-        const apptVins = appointments.map(appt => appt.vin);
-        for (let auto of autos) {
-            if (apptVins.includes(auto.vin)) {
-                return true;
-            }
-            return false;
-
+    const fetchAutos = async () => {
+        const response = await fetch("http://localhost:8100/api/automobiles/")
+        if (response.ok) {
+            const data = await response.json();
+            setAutomobiles(data.autos)
         }
     }
+
+
+    // async function isVip() {
+    //     const autoUrl = "http://localhost:8100/api/automobiles/";
+    //     const apptUrl = "http://localhost:8080/api/appointments/";
+    //     const autoResponse = await fetch(autoUrl);
+    //     const apptResponse = await fetch(apptUrl);
+
+    //     const {autos} = await autoResponse.json();
+    //     const {appointments} = await apptResponse.json();
+
+    //     const apptVins = appointments.map(appt => appt.vin);
+    //     for (let auto of autos) {
+    //         if (apptVins.includes(auto.vin)) {
+    //             return true;
+    //         }
+    //         return false;
+
+    //     }
+    // }
 
     const handleCancel = async (id) => {
         const appointmentUrl = `http://localhost:8080/api/appointments/${id}/cancel/`;
@@ -63,6 +73,7 @@ function AppointmentList() {
 
     useEffect(() => {
         fetchData();
+        fetchAutos();
     }, []);
 
     const formatDateTime = (dateTimeString) => {
@@ -98,7 +109,15 @@ function AppointmentList() {
                                 <td>{appointment.customer}</td>
                                 <td>{date}</td>
                                 <td>{time}</td>
-                                <td>{ isVip() ? "Yes" : "No" }</td>
+                                <td>
+                                            {automobiles.map(automobile => {
+                                                if (appointment.vin === automobile.vin) {
+                                                    return "Yes"
+                                                } else {
+                                                    return null
+                                                }
+                                            })}
+                                        </td>
                                 <td>{appointment.technician.first_name} {appointment.technician.last_name}</td>
                                 <td>{appointment.reason}</td>
                                 <td>

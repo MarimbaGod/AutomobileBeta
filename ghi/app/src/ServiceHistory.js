@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 
 function ServiceHistory() {
     const [vin, setVin] = useState('');
+    const [automobiles, setAutomobiles] = useState('');
     const [appointments, setAppointments] = useState([]);
 
 
@@ -10,7 +11,13 @@ function ServiceHistory() {
         setVin(value);
     }
 
-
+    const fetchAutos = async () => {
+        const response = await fetch("http://localhost:8100/api/automobiles/")
+        if (response.ok) {
+            const data = await response.json();
+            setAutomobiles(data.autos)
+        }
+    }
 
     async function getAppointments() {
         const url = "http://localhost:8080/api/appointments/";
@@ -25,36 +32,34 @@ function ServiceHistory() {
         }
     }
 
-    async function isVip() {
-        const url = "http://localhost:8100/api"
-    }
 
     const handleSubmit = (event) => {
         event.preventDefault();
         getAppointments();
     }
 
-    async function isVip() {
-        const autoUrl = "http://localhost:8100/api/automobiles/";
-        const apptUrl = "http://localhost:8080/api/appointments/";
-        const autoResponse = await fetch(autoUrl);
-        const apptResponse = await fetch(apptUrl);
+    // async function isVip() {
+    //     const autoUrl = "http://localhost:8100/api/automobiles/";
+    //     const apptUrl = "http://localhost:8080/api/appointments/";
+    //     const autoResponse = await fetch(autoUrl);
+    //     const apptResponse = await fetch(apptUrl);
 
-        const {autos} = await autoResponse.json();
-        const {appointments} = await apptResponse.json();
+    //     const {autos} = await autoResponse.json();
+    //     const {appointments} = await apptResponse.json();
 
-        const apptVins = appointments.map(appt => appt.vin);
-        for (let auto of autos) {
-            if (apptVins.includes(auto.vin)) {
-                return true;
-            }
-            return false;
+    //     const apptVins = appointments.map(appt => appt.vin);
+    //     for (let auto of autos) {
+    //         if (apptVins.includes(auto.vin)) {
+    //             return true;
+    //         }
+    //         return false;
 
-        }
-    }
+    //     }
+    // }
 
     useEffect(() => {
         getAppointments();
+        fetchAutos();
     }, []);
 
 
@@ -88,7 +93,15 @@ function ServiceHistory() {
                                 return(
                                     <tr key={appointment.id} value={appointment.id}>
                                         <td>{appointment.vin}</td>
-                                        <td>{isVip() ? "Yes": "No" }</td>
+                                        <td>
+                                            {automobiles.map(automobile => {
+                                                if (appointment.vin === automobile.vin) {
+                                                    return "Yes"
+                                                } else {
+                                                    return null
+                                                }
+                                            })}
+                                        </td>
                                         <td>{appointment.customer}</td>
                                         <td>{dateTime.toLocaleDateString()}</td>
                                         <td>{dateTime.toLocaleTimeString()}</td>
