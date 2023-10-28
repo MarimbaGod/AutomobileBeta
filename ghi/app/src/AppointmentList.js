@@ -14,6 +14,25 @@ function AppointmentList() {
         }
     }
 
+    async function isVip() {
+        const autoUrl = "http://localhost:8100/api/automobiles/";
+        const apptUrl = "http://localhost:8080/api/appointments/";
+        const autoResponse = await fetch(autoUrl);
+        const apptResponse = await fetch(apptUrl);
+
+        const {autos} = await autoResponse.json();
+        const {appointments} = await apptResponse.json();
+
+        const apptVins = appointments.map(appt => appt.vin);
+        for (let auto of autos) {
+            if (apptVins.includes(auto.vin)) {
+                return true;
+            }
+            return false;
+
+        }
+    }
+
     const handleCancel = async (id) => {
         const appointmentUrl = `http://localhost:8080/api/appointments/${id}/cancel/`;
         const fetchConfig = {
@@ -65,6 +84,7 @@ function AppointmentList() {
                         <th>Customer Name</th>
                         <th>Date</th>
                         <th>Time</th>
+                        <th>VIP Status</th>
                         <th>Technician</th>
                         <th>Reason</th>
                     </tr>
@@ -78,6 +98,7 @@ function AppointmentList() {
                                 <td>{appointment.customer}</td>
                                 <td>{date}</td>
                                 <td>{time}</td>
+                                <td>{ isVip() ? "Yes" : "No" }</td>
                                 <td>{appointment.technician.first_name} {appointment.technician.last_name}</td>
                                 <td>{appointment.reason}</td>
                                 <td>

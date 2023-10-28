@@ -103,10 +103,15 @@ def delete_technician(request, pk):
 @require_http_methods(["GET", "POST"])
 def list_appointments(request):
     if request.method == "GET":
+        vin = request.GET.get('vin', None)
+        if vin:
+            appointments = Appointment.objects.filter(vin=vin)
+        else:
+            appointments = Appointment.objects.all()
         # if id is not None:
         # appointments = Appointment.objects.filter(technician=id)
         # else:
-        appointments = Appointment.objects.all()
+        # appointments = Appointment.objects.all()
 
         return JsonResponse(
             {"appointments": appointments},

@@ -19,7 +19,9 @@ function ManufacturerList() {
     return (
         <table className="table table-striped">
             <thead>
-                <tr>Manufacturers</tr>
+                <tr>
+                    <th>Manufacturers</th>
+                </tr>
             </thead>
             <tbody>
                 {manufacturers && manufacturers.map(manufacturer => {
